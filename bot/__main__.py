@@ -37,21 +37,18 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'▶ Rᴜɴɴɪɴɢ Sɪɴᴄᴇ ▶ : {currentTime}\n' \
-            f'<b>DISK INFO</b>\n' \
+    stats = f'<b>Cinguin Mirror<b> : {currentTime}\n' \
             f'<b><i>Total</i></b>: {total}\n' \
             f'<b><i>Used</i></b>: {used} ~ ' \
             f'<b><i>Free</i></b>: {free}\n\n' \
-            f'<b>DATA USAGE</b>\n' \
             f'<b><i>UL</i></b>: {sent} ~ ' \
             f'<b><i>DL</i></b>: {recv}\n\n' \
-            f'<b>SERVER STATS</b>\n' \
             f'<b><i>CPU</i></b>: {cpuUsage}%\n' \
             f'<b><i>RAM</i></b>: {memory}%\n' \
             f'<b><i>DISK</i></b>: {disk}%\n'
     keyboard = [[InlineKeyboardButton("CLOSE", callback_data="stats_close")]]
     main = sendMarkup(stats, context.bot, update, reply_markup=InlineKeyboardMarkup(keyboard))
-
+    update.effective_message.reply_photo("https://telegra.ph/file/2fcd37ff0eef69915e342.jpg", stats, parse_mode=ParseMode.HTML)
 
 def call_back_data(update, context):
     global main
@@ -63,18 +60,18 @@ def call_back_data(update, context):
 
 def start(update, context):
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Repo", "https://github.com/PriiiiyoDevs/priiiiyo-mirror-leech-bot")
-    buttons.buildbutton("Channel", "https://t.me/PriiiiyoMirrorUpdates")
+    buttons.buildbutton("Owner", "https://t.me/Cinguin")
+    buttons.buildbutton("Channel", "https://t.me/RandomHappy")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         start_string = f'''
-This bot can mirror all your links to Google Drive!
+Hi, I'm Aioi Aoi, a multipurpose bot from Cinguin.Aioi Aoi Aioi Aoi Aioi Aoi  ❤️ ❤️ ❤️ WANGI WANGI WANGI WANGI HU HA HU HA HU HA
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
         sendMarkup(start_string, context.bot, update, reply_markup)
     else:
         sendMarkup(
-            'Oops! not a Authorized user.\nPlease deploy your own <b>priiiiyo-mirror-leech-bot</b>.',
+            'Oops! not a Authorized user.\nPlease deploy your own <b>Cinguin Mirror Bot</b>.',
             context.bot,
             update,
             reply_markup,
@@ -166,9 +163,9 @@ help_string_telegraph = f'''<br>
 <b>/{BotCommands.StatsCommand}</b>: Show Stats of the machine the bot is hosted on
 '''
 help = Telegraph(access_token=telegraph_token).create_page(
-        title='Priiiiyo Mirror Leech Help',
-        author_name='Priiiiyo Mirror Leech',
-        author_url='https://github.com/PriiiiyoDevs/priiiiyo-mirror-leech-bot',
+        title='Cinguin Mirror Leech Help',
+        author_name='Cinguin Mirror Leech',
+        author_url='https://t.me/Random Happy',
         html_content=help_string_telegraph,
     )["path"]
 
@@ -202,8 +199,9 @@ help_string = f'''
 
 def bot_help(update, context):
     button = button_build.ButtonMaker()
+    button.buildbutton("Cool Features", "https://telegra.ph/Magneto-Python-Aria---Custom-Filename-Examples-01-20")
     button.buildbutton("Other Commands", f"https://telegra.ph/{help}")
-    reply_markup = InlineKeyboardMarkup(button.build_menu(1))
+    reply_markup = InlineKeyboardMarkup(button.build_menu(2))
     sendMarkup(help_string, context.bot, update, reply_markup)
 
 '''
